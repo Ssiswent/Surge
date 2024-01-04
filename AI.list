@@ -63,3 +63,4 @@ DOMAIN-SUFFIX,claude.ai
 # Bard
 DOMAIN-SUFFIX,bard.google.com
 DOMAIN-SUFFIX,googleapis.com
+DOMAIN-SUFFIX,makersuite.google.com
