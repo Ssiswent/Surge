@@ -65,3 +65,7 @@ DOMAIN-SUFFIX,claude.ai
 DOMAIN-SUFFIX,bard.google.com
 DOMAIN-SUFFIX,googleapis.com
 DOMAIN-SUFFIX,makersuite.google.com
+
+# Github Copilot
+DOMAIN-KEYWORD,copilot
+DOMAIN,default.exp-tas.com
