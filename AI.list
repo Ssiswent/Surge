@@ -61,10 +61,11 @@ DOMAIN,cdn.usefathom.com
 DOMAIN-SUFFIX,anthropic.com
 DOMAIN-SUFFIX,claude.ai
 
-# Bard
+# Bard, Gemini
 DOMAIN-SUFFIX,bard.google.com
 DOMAIN-SUFFIX,googleapis.com
 DOMAIN-SUFFIX,makersuite.google.com
+DOMAIN-SUFFIX,gemini.google.com
 
 # Github Copilot
 DOMAIN-KEYWORD,copilot
