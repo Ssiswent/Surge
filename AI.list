@@ -62,6 +62,8 @@ DOMAIN-KEYWORD,generativelanguage
 # Github Copilot
 DOMAIN-KEYWORD,copilot
 DOMAIN,default.exp-tas.com
+
+# Copilot
 DOMAIN,api.msn.com
 DOMAIN,api.statsig.com
 DOMAIN,assets.msn.com
