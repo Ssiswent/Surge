@@ -165,3 +165,6 @@ DOMAIN,apple-relay.apple.com
 
 # NAME: Groq
 DOMAIN-SUFFIX,groq.com
+
+# NAME: Grok
+DOMAIN-SUFFIX,grok.com
