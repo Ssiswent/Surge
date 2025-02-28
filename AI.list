@@ -71,6 +71,7 @@ DOMAIN-SUFFIX,bingworld.com
 DOMAIN,cdn.usefathom.com
 DOMAIN-SUFFIX,anthropic.com
 DOMAIN-SUFFIX,claude.ai
+DOMAIN-SUFFIX,claudeusercontent.com
 
 # NAME: Gemini
 # AUTHOR: blackmatrix7
