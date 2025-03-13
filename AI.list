@@ -98,6 +98,7 @@ DOMAIN-KEYWORD,generativelanguage
 # Github Copilot
 DOMAIN-KEYWORD,copilot
 DOMAIN,default.exp-tas.com
+DOMAIN-SUFFIX,github.com
 
 # NAME: Copilot
 # AUTHOR: blackmatrix7
