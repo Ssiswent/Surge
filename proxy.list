@@ -1,0 +1,4 @@
+PROCESS-NAME,"/Library/Application Support/Logitech.localized/LogiOptionsPlus/logioptionsplus_agent.app/Contents/Frameworks/logioptionsplus_updater.app/Contents/MacOS/logioptionsplus_updater"
+PROCESS-NAME,/Applications/logioptionsplus.app/Contents/MacOS/logioptionsplus
+PROCESS-NAME,"/Library/Application Support/Logitech.localized/LogiOptionsPlus/logioptionsplus_agent.app/Contents/MacOS/logioptionsplus_agent"
+DOMAIN-SUFFIX,linux.do
