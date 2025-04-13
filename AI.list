@@ -206,6 +206,9 @@ IP-CIDR,69.195.160.0/19,no-resolve
 
 # NAME: Windsurf
 DOMAIN-SUFFIX,codeium.com
-PROCESS-NAME,/Applications/Windsurf.app/Contents/MacOS/Electron
+PROCESS-NAME,"/Applications/Windsurf.app/Contents/MacOS/Electron"
 PROCESS-NAME,"/Applications/Windsurf.app/Contents/Frameworks/Windsurf Helper (Plugin).app/Contents/MacOS/Windsurf Helper (Plugin)"
 PROCESS-NAME,"/Applications/Windsurf.app/Contents/Frameworks/Windsurf Helper.app/Contents/MacOS/Windsurf Helper"
+
+# NAME: Zed
+PROCESS-NAME,"/Applications/Zed Preview.app/Contents/MacOS/zed"
