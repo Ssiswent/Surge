@@ -212,3 +212,6 @@ PROCESS-NAME,"/Applications/Windsurf.app/Contents/Frameworks/Windsurf Helper.app
 
 # NAME: Zed
 PROCESS-NAME,"/Applications/Zed Preview.app/Contents/MacOS/zed"
+
+# NAME: Gemini
+DOMAIN-SUFFIX,gemini.google
