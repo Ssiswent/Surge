@@ -236,3 +236,6 @@ PROCESS-NAME,"/Applications/Dia.app/Contents/Frameworks/ArcCore.framework/Versio
 
 # NAME: Augmentcode
 DOMAIN-SUFFIX,augmentcode.com
+DOMAIN-KEYWORD,augmentcode
+DOMAIN-KEYWORD,augment
+DOMAIN-KEYWORD,augment-assets
