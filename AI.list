@@ -233,3 +233,6 @@ DOMAIN-SUFFIX,gemini.google
 # NAME: Dia
 PROCESS-NAME,"/Applications/Dia.app/Contents/MacOS/Dia"
 PROCESS-NAME,"/Applications/Dia.app/Contents/Frameworks/ArcCore.framework/Versions/A/Helpers/Browser Helper.app/Contents/MacOS/Browser Helper"
+
+# NAME: Augmentcode
+DOMAIN-SUFFIX,augmentcode.com
