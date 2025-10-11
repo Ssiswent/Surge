@@ -248,3 +248,12 @@ DOMAIN-SUFFIX,augmentcode.com
 DOMAIN-KEYWORD,augmentcode
 DOMAIN-KEYWORD,augment
 DOMAIN-KEYWORD,augment-assets
+
+# NAME: Perplexity
+DOMAIN,pplx-res.cloudinary.com
+DOMAIN-SUFFIX,perplexity.ai
+DOMAIN-SUFFIX,pplx.ai
+DOMAIN-SUFFIX,perplexity.com
+
+# NAME: Cursor
+DOMAIN-SUFFIX,cursor.sh
