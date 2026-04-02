@@ -1,16 +1,13 @@
 #!name=猫熊网络加速器签到
-#!desc=猫熊网络加速器每日自动签到\n首次使用：打开 Surge，访问 https://mxwljsq.com/user/ 触发一次 Cookie 抓取
+#!desc=猫熊网络加速器每日自动签到\n首次使用请打开 https://mxwljsq.com/user 以保存登录态
 #!author=Ssiswent-custom
 #!category=签到工具
 #!arguments=CronExp:07 1 * * *
 #!arguments-desc=CronExp:签到时间 (Cron 表达式，默认每天 01:07)
 
 [Script]
-# 拦截首页请求，自动抓取并保存 Cookie
-MX_GetCookie = type=http-request,pattern=^https:\/\/mxwljsq\.com\/user\/$,requires-body=0,max-size=0,script-path=https://raw.githubusercontent.com/Ssiswent/Surge/refs/heads/main/Scripts/mxwljsq_checkin.js
-
-# 定时签到任务
-MX_Checkin = type=cron,cronexp="{{{CronExp}}}",wake-system=1,timeout=30,script-path=https://raw.githubusercontent.com/Ssiswent/Surge/refs/heads/main/Scripts/mxwljsq_checkin.js
+MX_GetCookie = type=http-request,pattern=^https:\/\/mxwljsq\.com\/user,requires-body=0,max-size=0,script-path=https://raw.githubusercontent.com/Ssiswent/Surge/refs/heads/main/Modules/mxwljsq_checkin.js
+MX_Checkin = type=cron,cronexp="{{{CronExp}}}",wake-system=1,timeout=30,script-path=https://raw.githubusercontent.com/Ssiswent/Surge/refs/heads/main/Modules/mxwljsq_checkin.js
 
 [MITM]
 hostname=%APPEND% mxwljsq.com
