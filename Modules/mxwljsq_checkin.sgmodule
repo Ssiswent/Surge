@@ -6,8 +6,8 @@
 #!arguments-desc=CronExp:签到时间 (Cron 表达式，默认每天 01:07)
 
 [Script]
-MX_GetCookie = type=http-request,pattern=^https:\/\/mxwljsq\.com\/user,requires-body=0,max-size=0,script-path=https://raw.githubusercontent.com/Ssiswent/Surge/refs/heads/main/Modules/mxwljsq_checkin.js
-MX_Checkin = type=cron,cronexp="{{{CronExp}}}",wake-system=1,timeout=30,script-path=https://raw.githubusercontent.com/Ssiswent/Surge/refs/heads/main/Modules/mxwljsq_checkin.js
+MX_GetCookie = type=http-request,pattern=^https:\/\/mxwljsq\.com\/user,requires-body=0,max-size=0,script-path=https://raw.githubusercontent.com/Ssiswent/Surge/refs/heads/main/Scripts/mxwljsq_checkin.js
+MX_Checkin = type=cron,cronexp="{{{CronExp}}}",wake-system=1,timeout=30,script-path=https://raw.githubusercontent.com/Ssiswent/Surge/refs/heads/main/Scripts/mxwljsq_checkin.js
 
 [MITM]
 hostname=%APPEND% mxwljsq.com
