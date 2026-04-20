@@ -237,6 +237,8 @@ PROCESS-NAME,"/Applications/Utilities/Windsurf - Next.app/"
 PROCESS-NAME,"/Applications/Utilities/Windsurf - Next.app/Contents/Resources/app/extensions/windsurf/bin/language_server_macos_arm"
 PROCESS-NAME,"/Applications/Utilities/Windsurf - Next.app/Contents/Frameworks/Windsurf - Next Helper.app/Contents/MacOS/Windsurf - Next Helper"
 PROCESS-NAME,"/Applications/Utilities/Windsurf - Next.app/Contents/Frameworks/Windsurf - Next Helper (Plugin).app/Contents/MacOS/Windsurf - Next Helper (Plugin)"
+DOMAIN-KEYWORD,devin
+DOMAIN-KEYWORD,cognition
 
 # NAME: Zed
 PROCESS-NAME,"/Applications/Zed Preview.app/Contents/MacOS/zed"
