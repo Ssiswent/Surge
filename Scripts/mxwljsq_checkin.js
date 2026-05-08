@@ -1,11 +1,23 @@
 // mxwljsq_checkin.js for Surge
-// 猫熊网络加速器自动签到（状态可查询 + 严格判断版）
+// 猫熊网络加速器自动签到
+// 功能：Cookie 捕获 + cron 签到 + 状态查询
+// 重要修复：
+// 1. 状态查询 URL 必须返回 JSON，不允许进入 Cookie 捕获分支
+// 2. HTTP 200 + 登录页 HTML 必须判断为 Cookie 过期
+// 3. 只有 /user 页面请求才允许保存 Cookie
+// 4. 状态查询请求绝不覆盖 Cookie
+// 5. Cookie 缺少 uid/key 等登录态字段时，不覆盖旧 Cookie
 
 const COOKIE_KEY = "MXWLJSQ_Cookie";
 const STATUS_KEY = "MXWLJSQ_Checkin_Status";
 const TITLE = "猫熊签到";
 const BASE_URL = "https://mxwljsq.com";
+
 const STATUS_PATH = "/__surge_mxwljsq_status";
+const STATUS_LOCAL_HOST = "mxwljsq-checkin.local";
+const STATUS_LOCAL_PATH = "/status";
+
+const SCRIPT_VERSION = "2026-05-08-status3";
 
 function nowISO() {
   return new Date().toISOString();
@@ -24,10 +36,10 @@ function truncate(value, maxLength) {
 
 function getHeader(headers, name) {
   if (!headers) return "";
-  const lowerName = name.toLowerCase();
+  const target = name.toLowerCase();
 
   for (const key in headers) {
-    if (String(key).toLowerCase() === lowerName) {
+    if (String(key).toLowerCase() === target) {
       return headers[key];
     }
   }
@@ -93,7 +105,7 @@ function looksLikeLoginPage(body, headers) {
     lower.includes("<html") ||
     raw.includes("<title>登录") ||
     raw.includes("登录 &mdash; 猫熊网络加速器") ||
-    raw.includes("猫熊网络加速器") && raw.includes("请输入您的邮箱") ||
+    (raw.includes("猫熊网络加速器") && raw.includes("请输入您的邮箱")) ||
     raw.includes("/auth/login") ||
     raw.includes("请输入您的邮箱") ||
     raw.includes("请输入6位验证码") ||
@@ -136,8 +148,10 @@ function hasAuthFailure(text, json) {
 
   if (json) {
     const msg = safeString(json.msg || json.message || json.error).toLowerCase();
+
     if (
       msg.includes("未登录") ||
+      msg.includes("请登录") ||
       msg.includes("登录") ||
       msg.includes("cookie") ||
       msg.includes("auth") ||
@@ -152,7 +166,7 @@ function hasAuthFailure(text, json) {
     s.includes("未登录") ||
     s.includes("请登录") ||
     s.includes("登录已失效") ||
-    s.includes("cookie") && s.includes("过期") ||
+    (s.includes("cookie") && s.includes("过期")) ||
     s.includes("unauthorized") ||
     s.includes("unauthenticated")
   );
@@ -165,20 +179,31 @@ function cookieNameList(cookie) {
     .filter(Boolean);
 }
 
+function hasLoginCookie(cookie) {
+  const names = cookieNameList(cookie);
+  const hasUid = names.includes("uid");
+  const hasKey = names.includes("key");
+  const hasEmail = names.includes("email");
+  const hasExpire = names.includes("expire_in");
+
+  // 猫熊登录态通常至少应包含 uid/key，email/expire_in 作为辅助判断。
+  return hasUid && hasKey && (hasEmail || hasExpire);
+}
+
 function saveStatus(status) {
   const payload = Object.assign(
     {
       updated_at: nowISO(),
-      version: "2026-05-08-status-query"
+      version: SCRIPT_VERSION
     },
     status || {}
   );
 
-  $persistentStore.write(JSON.stringify(payload), STATUS_KEY);
+  const text = JSON.stringify(payload);
+  $persistentStore.write(text, STATUS_KEY);
 
-  // 有些 Surge 执行环境会收集 console.log，有些不会。
-  // 保留这个日志，方便能读取 stdout 的环境解析。
-  console.log("[MXWLJSQ_RESULT] " + JSON.stringify(payload));
+  // 有些执行方式会收集 console.log，有些不会；保留便于调试。
+  console.log("[MXWLJSQ_RESULT] " + text);
 
   return payload;
 }
@@ -199,11 +224,25 @@ function notifyAndSave(kind, subtitle, message, extra) {
   return payload;
 }
 
+function isStatusRequest(url) {
+  const u = safeString(url);
+
+  return (
+    u.includes(STATUS_PATH) ||
+    u.includes(`${STATUS_LOCAL_HOST}${STATUS_LOCAL_PATH}`)
+  );
+}
+
+function isUserRequest(url) {
+  return /^https:\/\/mxwljsq\.com\/user\/?$/.test(safeString(url));
+}
+
 function respondStatus() {
   const saved = $persistentStore.read(STATUS_KEY);
   const cookie = $persistentStore.read(COOKIE_KEY) || "";
 
   let status;
+
   if (saved) {
     try {
       status = JSON.parse(saved);
@@ -212,7 +251,8 @@ function respondStatus() {
         kind: "status_parse_error",
         subtitle: "状态读取失败",
         message: saved,
-        updated_at: nowISO()
+        updated_at: nowISO(),
+        version: SCRIPT_VERSION
       };
     }
   } else {
@@ -220,19 +260,24 @@ function respondStatus() {
       kind: "no_status",
       subtitle: "暂无签到状态",
       message: "还没有执行过 MX_Checkin",
-      updated_at: nowISO()
+      updated_at: nowISO(),
+      version: SCRIPT_VERSION
     };
   }
 
   status.cookie_saved = !!cookie;
+  status.cookie_has_login_fields = hasLoginCookie(cookie);
   status.cookie_names = cookieNameList(cookie);
+  status.status_query_ok = true;
+  status.status_query_version = SCRIPT_VERSION;
 
   $done({
     response: {
       status: 200,
       headers: {
         "Content-Type": "application/json; charset=utf-8",
-        "Cache-Control": "no-store"
+        "Cache-Control": "no-store",
+        "Access-Control-Allow-Origin": "*"
       },
       body: JSON.stringify(status, null, 2)
     }
@@ -240,14 +285,27 @@ function respondStatus() {
 }
 
 function captureCookie() {
+  const url = $request.url || "";
   const headers = $request.headers || {};
   const cookieHeader = headers["Cookie"] || headers["cookie"] || "";
+
+  if (!isUserRequest(url)) {
+    saveStatus({
+      kind: "ignored_request",
+      subtitle: "忽略非用户页请求",
+      message: "只有 https://mxwljsq.com/user 或 /user/ 请求才会用于保存 Cookie",
+      request_url: url
+    });
+    $done({});
+    return;
+  }
 
   if (!cookieHeader) {
     saveStatus({
       kind: "cookie_capture_empty",
       subtitle: "未捕获到 Cookie",
-      message: "访问 /user 时请求头里没有 Cookie"
+      message: "访问 /user 时请求头里没有 Cookie",
+      request_url: url
     });
     $done({});
     return;
@@ -255,10 +313,26 @@ function captureCookie() {
 
   const oldCookie = $persistentStore.read(COOKIE_KEY) || "";
 
+  if (!hasLoginCookie(cookieHeader)) {
+    saveStatus({
+      kind: "cookie_capture_ignored",
+      subtitle: "Cookie 未保存",
+      message: "捕获到的 Cookie 缺少 uid/key 等登录态字段，为避免覆盖有效 Cookie，已忽略",
+      request_url: url,
+      cookie_saved: !!oldCookie,
+      cookie_names_seen: cookieNameList(cookieHeader),
+      cookie_names_existing: cookieNameList(oldCookie)
+    });
+    $done({});
+    return;
+  }
+
   if (oldCookie !== cookieHeader) {
     $persistentStore.write(cookieHeader, COOKIE_KEY);
     notifyAndSave("cookie_updated", "Cookie 已更新", "已保存最新登录态", {
+      request_url: url,
       cookie_saved: true,
+      cookie_has_login_fields: true,
       cookie_names: cookieNameList(cookieHeader)
     });
   } else {
@@ -266,7 +340,9 @@ function captureCookie() {
       kind: "cookie_unchanged",
       subtitle: "Cookie 未变化",
       message: "当前登录态已保存",
+      request_url: url,
       cookie_saved: true,
+      cookie_has_login_fields: true,
       cookie_names: cookieNameList(cookieHeader)
     });
   }
@@ -279,7 +355,18 @@ function runCheckin() {
 
   if (!cookie) {
     notifyAndSave("no_cookie", "无法签到", "本地没有 Cookie，请先打开一次猫熊用户页", {
-      cookie_saved: false
+      cookie_saved: false,
+      cookie_has_login_fields: false
+    });
+    $done();
+    return;
+  }
+
+  if (!hasLoginCookie(cookie)) {
+    notifyAndSave("cookie_expired", "Cookie 不完整", "已保存 Cookie 缺少 uid/key 等登录态字段，请重新登录并打开用户页刷新 Cookie", {
+      cookie_saved: true,
+      cookie_has_login_fields: false,
+      cookie_names: cookieNameList(cookie)
     });
     $done();
     return;
@@ -305,6 +392,7 @@ function runCheckin() {
       if (error) {
         notifyAndSave("request_failed", "请求失败", String(error), {
           cookie_saved: true,
+          cookie_has_login_fields: hasLoginCookie(cookie),
           cookie_names: cookieNameList(cookie)
         });
         $done();
@@ -325,9 +413,10 @@ function runCheckin() {
       const common = {
         http_status: status,
         content_type: contentType,
-        location: location,
+        location,
         response_summary: responseSummary,
         cookie_saved: true,
+        cookie_has_login_fields: hasLoginCookie(cookie),
         cookie_names: cookieNameList(cookie)
       };
 
@@ -401,7 +490,8 @@ function runCheckin() {
 if (typeof $request !== "undefined") {
   const url = $request.url || "";
 
-  if (url.includes(STATUS_PATH)) {
+  // 关键：状态查询必须最先判断，绝不能落入 captureCookie。
+  if (isStatusRequest(url)) {
     respondStatus();
   } else {
     captureCookie();
