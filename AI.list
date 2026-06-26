@@ -115,6 +115,7 @@ DOMAIN-KEYWORD,notebooklm.google
 DOMAIN-KEYWORD,copilot
 DOMAIN,default.exp-tas.com
 DOMAIN-SUFFIX,github.com
+PROCESS-NAME,"/Applications/GitHub Copilot.app/"
 
 # NAME: Copilot
 # AUTHOR: blackmatrix7
