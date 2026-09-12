@@ -32,14 +32,14 @@ DOMAIN-SUFFIX,launchdarkly.com
 DOMAIN-SUFFIX,oaistatic.com
 DOMAIN-SUFFIX,oaiusercontent.com
 DOMAIN-SUFFIX,observeit.net
-DOMAIN-SUFFIX,openai.com
+DOMAIN-SUFFIX,openai.com,extended-matching
 DOMAIN-SUFFIX,openaiapi-site.azureedge.net
 DOMAIN-SUFFIX,openaicom.imgix.net
 DOMAIN-SUFFIX,segment.io
 DOMAIN-SUFFIX,sentry.io
 DOMAIN-SUFFIX,stripe.com
 DOMAIN-SUFFIX,turn.livekit.cloud
-DOMAIN-SUFFIX,auth.openai.com
+DOMAIN-SUFFIX,auth.openai.com,extended-matching
 DOMAIN-SUFFIX,sentinel.openai.com
 DOMAIN-KEYWORD,openai
 IP-CIDR,24.199.123.28/32,no-resolve
