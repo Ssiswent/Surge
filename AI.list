@@ -4,10 +4,10 @@
 # UPDATED: 2025-06-06 09:20:00
 # DOMAIN: 7
 # DOMAIN-KEYWORD: 1
-# DOMAIN-SUFFIX: 24
+# DOMAIN-SUFFIX: 29
 # IP-ASN: 1
 # IP-CIDR: 2
-# TOTAL: 35
+# TOTAL: 40
 DOMAIN,browser-intake-datadoghq.com
 DOMAIN,chat.openai.com.cdn.cloudflare.net
 DOMAIN,openai-api.arkoselabs.com
@@ -45,11 +45,14 @@ DOMAIN-KEYWORD,openai
 IP-CIDR,24.199.123.28/32,no-resolve
 IP-CIDR,64.23.132.171/32,no-resolve
 IP-ASN,20473,no-resolve
+DOMAIN-SUFFIX,livekit.cloud
+DOMAIN-SUFFIX,azureedge.net
+DOMAIN-SUFFIX,imgix.net
 
 # NAME: Bing
 # AUTHOR: blackmatrix7
 # REPO: https://github.com/blackmatrix7/ios_rule_script
-# UPDATED: 2024-07-03 16:18:28
+# UPDATED: 2025-06-06 09:20:00
 # DOMAIN-SUFFIX: 9
 # TOTAL: 9
 DOMAIN-SUFFIX,bing.com
@@ -65,10 +68,10 @@ DOMAIN-SUFFIX,bingworld.com
 # NAME: Claude
 # AUTHOR: blackmatrix7
 # REPO: https://github.com/blackmatrix7/ios_rule_script
-# UPDATED: 2024-07-03 16:18:28
+# UPDATED: 2025-06-06 09:20:01
 # DOMAIN: 1
-# DOMAIN-SUFFIX: 2
-# TOTAL: 3
+# DOMAIN-SUFFIX: 4
+# TOTAL: 6
 DOMAIN,cdn.usefathom.com
 DOMAIN-SUFFIX,anthropic.com
 DOMAIN-SUFFIX,claude.ai
@@ -79,17 +82,18 @@ DOMAIN-KEYWORD,claude
 # NAME: Gemini
 # AUTHOR: blackmatrix7
 # REPO: https://github.com/blackmatrix7/ios_rule_script
-# UPDATED: 2024-07-03 16:18:30
-# DOMAIN: 3
-# DOMAIN-KEYWORD: 3
-# DOMAIN-SUFFIX: 7
-# TOTAL: 13
+# UPDATED: 2025-06-06 09:20:02
+# DOMAIN: 7
+# DOMAIN-KEYWORD: 6
+# DOMAIN-SUFFIX: 18
+# TOTAL: 31
 DOMAIN,ai.google.dev
 DOMAIN,aistudio.google.com
 DOMAIN,alkalicore-pa.clients6.google.com
 DOMAIN,alkalimakersuite-pa.clients6.google.com
 DOMAIN,makersuite.google.com
 DOMAIN,jules.google.com
+DOMAIN,generativelanguage.googleapis.com
 DOMAIN-SUFFIX,bard.google.com
 DOMAIN-SUFFIX,deepmind.com
 DOMAIN-SUFFIX,deepmind.google
@@ -102,14 +106,18 @@ DOMAIN-SUFFIX,google-analytics.com
 DOMAIN-SUFFIX,googleai.com
 DOMAIN-SUFFIX,googleapis.com
 DOMAIN-SUFFIX,googletagmanager.com
-DOMAIN-SUFFIX,notebooklm.google
-DOMAIN-SUFFIX,notebooklm.google.com
 DOMAIN-KEYWORD,colab
 DOMAIN-KEYWORD,developerprofiles
 DOMAIN-KEYWORD,generativelanguage
 DOMAIN-KEYWORD,alkalimakersuite-pa.clients6.google.com
 DOMAIN-KEYWORD,labs.google
 DOMAIN-KEYWORD,notebooklm.google
+DOMAIN-SUFFIX,clients6.google.com
+DOMAIN-SUFFIX,clients4.google.com
+DOMAIN-SUFFIX,colab.google.com
+DOMAIN-SUFFIX,colab.research.google.com
+DOMAIN-SUFFIX,developerprofiles.google.com
+DOMAIN-SUFFIX,googleusercontent.com
 
 # Github Copilot
 DOMAIN-KEYWORD,copilot
@@ -276,6 +284,10 @@ DOMAIN-SUFFIX,perplexity.com
 
 # NAME: Cursor
 DOMAIN-SUFFIX,cursor.sh
+DOMAIN-SUFFIX,cursor.com
+DOMAIN-SUFFIX,cursor-cdn.com
+DOMAIN-SUFFIX,cursorapi.com
+DOMAIN-SUFFIX,cursorvm.com
 
 # NAME: Adobe
 # AUTHOR: blackmatrix7
@@ -422,3 +434,68 @@ DOMAIN-SUFFIX,votolia.com
 DOMAIN-SUFFIX,worldsecureemail.com
 DOMAIN-SUFFIX,worldsecuresystems.com
 DOMAIN-KEYWORD,adobe
+
+# NAME: Ai general rules
+DOMAIN,api.statsig.com
+DOMAIN,browser-intake-datadoghq.com
+DOMAIN,static.cloudflareinsights.com
+DOMAIN-SUFFIX,algolia.net
+DOMAIN-SUFFIX,auth0.com
+DOMAIN-SUFFIX,cloudflare.com
+DOMAIN-SUFFIX,arkoselabs.com
+DOMAIN-SUFFIX,statsigapi.net
+DOMAIN-SUFFIX,featuregates.org
+DOMAIN-SUFFIX,identrust.com
+DOMAIN-SUFFIX,intercom.io
+DOMAIN-SUFFIX,intercomcdn.com
+DOMAIN-SUFFIX,launchdarkly.com
+DOMAIN-SUFFIX,segment.io
+DOMAIN-SUFFIX,amazonaws.com
+DOMAIN-SUFFIX,wp.com
+DOMAIN-SUFFIX,sentry.io
+DOMAIN-SUFFIX,stripe.com
+
+# NAME: Dify AI
+DOMAIN-SUFFIX,dify.ai
+
+# NAME: JetBrains AI
+DOMAIN-SUFFIX,grazie.ai
+
+# NAME: Meta
+DOMAIN-SUFFIX,meta.ai
+DOMAIN-SUFFIX,meta.com
+DOMAIN-SUFFIX,atmeta.com
+DOMAIN-SUFFIX,llamameta.net
+DOMAIN-SUFFIX,llama.com
+
+# NAME: Muse AI
+DOMAIN-SUFFIX,muse.ai
+DOMAIN,production.museai.com
+DOMAIN,connect.facebook.net
+DOMAIN,meta-ohttp-config-prod.fastly-edge.com
+DOMAIN,meta-ohttp-relay-prod.fastly-edge.com
+DOMAIN-SUFFIX,facebook.com
+DOMAIN-SUFFIX,fbcdn.net
+
+# NAME: Midjourney
+DOMAIN-SUFFIX,midjourney.com
+
+# NAME: Poe
+DOMAIN-SUFFIX,poe.com
+DOMAIN-SUFFIX,poecdn.net
+
+# NAME: Mistral AI
+DOMAIN-SUFFIX,mistral.ai
+
+# NAME: Hugging Face
+DOMAIN-SUFFIX,huggingface.co
+DOMAIN-SUFFIX,hf.co
+DOMAIN-SUFFIX,hf.space
+
+# NAME: Manus
+DOMAIN-SUFFIX,manus.im
+DOMAIN-SUFFIX,manuscdn.com
+
+# NAME: Notebooklm
+DOMAIN-SUFFIX,notebooklm.google.com
+DOMAIN-SUFFIX,notebooklm.google
