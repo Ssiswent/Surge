@@ -2,3 +2,12 @@ PROCESS-NAME,"/Applications/Slack.app/Contents/Frameworks/Slack Helper.app/Conte
 PROCESS-NAME,"/Applications/Slack.app/Contents/MacOS/Slack"
 DOMAIN-SUFFIX,ninjase.qa.atomictitan.dev
 DOMAIN-SUFFIX,ninjase.dev.atomictitan.dev
+DOMAIN-SUFFIX,muteki.site
+PROCESS-NAME,/Applications/UURemote.app/
+PROCESS-NAME,/Applications/Lody.app/
+DOMAIN-SUFFIX,botcf.com,extended-matching
+DOMAIN-SUFFIX,hyperapi.cc
+DOMAIN-SUFFIX,api-flowercloud.com
+DOMAIN-SUFFIX,api-huacloud.net
+DOMAIN-SUFFIX,api-huacloud.dev
+DOMAIN-SUFFIX,husanai.com
